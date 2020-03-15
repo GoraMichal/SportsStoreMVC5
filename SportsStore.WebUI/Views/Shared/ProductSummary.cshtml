@@ -1,0 +1,14 @@
+﻿@model SportsStore.Domain.Entities.Product
+
+<div class="card">
+    <h3>
+        <div class="card-header">
+            <strong>@Model.Name </strong>
+            <span class="float-right badge-info badge">@Model.Price.ToString("c")</span>
+        </div>
+    </h3>
+    <div class="card-body">
+        <p class="lead">@Model.Description</p>
+    </div>
+</div>
+
