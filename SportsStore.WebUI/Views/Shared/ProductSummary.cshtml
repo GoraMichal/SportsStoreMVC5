@@ -7,6 +7,16 @@
             <span class="float-right badge-info badge">@Model.Price.ToString("c")</span>
         </div>
     </h3>
+
+    @using (Html.BeginForm("AddCart", "Cart"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.ProductID)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Umieść w koszyku" />
+        </div>
+    }
+
     <div class="card-body">
         <p class="lead">@Model.Description</p>
     </div>
