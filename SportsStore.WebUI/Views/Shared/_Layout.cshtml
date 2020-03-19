@@ -8,9 +8,13 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <nav class="navbar-dark bg-dark">
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand" href="#">Sklep sportowy</a>
+        @Html.Action("Summary", "Cart")
     </nav>
+
+
+
     <div class="card-group bg-light mb-3">
         <div id="categories" class="col-xl-3">
             @Html.Action("Menu", "Nav")
