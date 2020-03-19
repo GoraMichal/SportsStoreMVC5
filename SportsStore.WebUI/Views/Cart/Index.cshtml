@@ -1,0 +1,48 @@
+﻿@model SportsStore.WebUI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Twój koszyk";
+}
+
+<h2>Twój koszyk</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ilość</th>
+            <th>Produkt</th>
+            <th class="text-right">Cena</th>
+            <th class="text-right">Wartość</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model.Cart.Lines)
+        {
+            <tr>
+                <td class="text-center">@data.Quantity</td>
+                <td class="text-left">@data.Product.Name</td>
+                <td class="text-right">@data.Product.Price.ToString("c")</td>
+                <td class="text-right">@((data.Quantity * data.Product.Price).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Łączna wartość:</td>
+            <td class="text-right">
+                @Model.Cart.ComputeTotalValue().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Kontynuuj zakupy</a>
+</div>
+
+
+@*Console.WriteLine(value.ToString("G"));         // Displays -16325
+Console.WriteLine(value.ToString("C"));         // Displays ($16,325.00)
+Console.WriteLine(value.ToString("D"));         // Displays -16325
+Console.WriteLine(value.ToString("F"));         // Displays -16325.00
+Console.WriteLine(value.ToString("N"));         // Displays -16,325.00
+Console.WriteLine(value.ToString("X"));         // Displays FFFFC03B*@ 

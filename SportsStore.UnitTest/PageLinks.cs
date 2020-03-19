@@ -31,7 +31,7 @@ namespace SportsStore.UnitTests
             ProductController controller = new ProductController(mock.Object);
             controller.PageSize = 3;
             // działanie
-            ProductsListViewModel result = (ProductsListViewModel)controller.List(2).Model;
+            ProductsListViewModel result = (ProductsListViewModel)controller.List(null, 2).Model;
             // asercje
             Product[] prodArray = result.Products.ToArray();
             Assert.IsTrue(prodArray.Length == 2);
@@ -78,7 +78,7 @@ namespace SportsStore.UnitTests
             ProductController controller = new ProductController(mock.Object);
             controller.PageSize = 3;
             // działanie
-            ProductsListViewModel result = (ProductsListViewModel)controller.List(2).Model;
+            ProductsListViewModel result = (ProductsListViewModel)controller.List(null, 2).Model;
             // asercje
             PagingInfo pageInfo = result.PagingInfo;
             Assert.AreEqual(pageInfo.CurrentPage, 2);
@@ -133,26 +133,6 @@ namespace SportsStore.UnitTests
             Assert.AreEqual(results[0], "Jabłka");
             Assert.AreEqual(results[1], "Pomarańcze");
             Assert.AreEqual(results[2], "Śliwki");
-        }
-
-        [TestMethod]
-        public void Indicates_Selected_Category()
-        {
-            // przygotowanie
-            // — tworzenie imitacji repozytorium
-            Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.Products).Returns(new Product[] {
-                 new Product {ProductID = 1, Name = "P1", Category = "Jabłka"},
-                 new Product {ProductID = 4, Name = "P2", Category = "Pomarańcze"},
-            });
-            // przygotowanie — utworzenie kontrolera
-            NavController target = new NavController(mock.Object);
-            // przygotowanie — definiowanie kategorii do wybrania
-            string categoryToSelect = "Jabłka";
-            // działanie
-            string result = target.Menu(categoryToSelect).ViewBag.SelectedCategory;
-            // asercje
-            Assert.AreEqual(categoryToSelect, result);
         }
 
         [TestMethod]
