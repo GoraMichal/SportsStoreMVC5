@@ -26,9 +26,12 @@ namespace SportsStore.UnitTest
                 }.AsQueryable());
             //Utworzenie koszyka
             Cart cart = new Cart();
-
+            cart.AddItem(new Product(), 1);
             //Utworzenie kontrolera
-            CartController target = new CartController(mock.Object);
+            CartController target = new CartController(mock.Object, null);
+
+            //Działanie - zakończenie zamówienia
+            ViewResult result = target.Checkout(cart, new ShippingDetails());
 
             //Dodanie produktu do koszyka
             target.AddToCart(cart, 1, null);

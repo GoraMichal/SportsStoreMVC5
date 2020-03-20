@@ -7,6 +7,7 @@ using Ninject;
 using SportsStore.Domain.Entities;
 using SportsStore.Domain.Concrete;
 using SportsStore.Domain.Abstract;
+using System.Configuration;
 
 namespace SportsStore.WebUI.Infrastructure
 {
@@ -37,6 +38,15 @@ namespace SportsStore.WebUI.Infrastructure
             //    new Product { Name = "Buty do biegania", Price = 95 }
             //});
             //kernel.Bind<IProductRepository>().ToConstant(mock.Object);
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
