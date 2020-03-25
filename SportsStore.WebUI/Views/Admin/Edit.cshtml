@@ -1,0 +1,15 @@
+﻿@model SportsStore.Domain.Entities.Product
+@{
+    ViewBag.Title = "Edycja " + @Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edytuj @Model.Name</h1>
+@using (Html.BeginForm())
+{
+    //Returns an HTML input element for each property in the model
+    @Html.EditorForModel()
+
+    <input type="submit" value="Zapisz" />
+    @Html.ActionLink("Powrót", "Index")
+}
