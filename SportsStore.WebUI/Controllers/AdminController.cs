@@ -33,15 +33,17 @@ namespace SportsStore.WebUI.Controllers
         [HttpPost]
         public ActionResult Edit(Product product)
         {
+            //kontrola poprawnosci danych
             if (ModelState.IsValid)
             {
                 repository.SaveProduct(product);
+                //komunikat, podobny do ViewBag, ale usuwany na koncu rzadania HTTP
                 TempData["message"] = string.Format("Zapisano {0} ", product.Name);
                 return RedirectToAction("Index");
             }
             else
             {
-                // błąd w wartościach danych
+                // błąd w wartościach danych i generowanie widoku
                 return View(product);
             }
         }

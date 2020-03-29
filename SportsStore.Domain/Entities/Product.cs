@@ -12,11 +12,22 @@ namespace SportsStore.Domain.Entities
     {
         [HiddenInput(DisplayValue = false)]
         public int ProductID { get; set; }
+
+        [Required(ErrorMessage = "Podaj nazwę produktu.")]
+        [Display(Name = "Nazwa")]
         public string Name { get; set; }
       
         [DataType(DataType.MultilineText), Display(Name = "Opis")]
+        [Required(ErrorMessage = "Podaj opis produktu.")]
         public string Description { get; set; }
+
+        [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Podaj cenę.")]
+        [Display(Name = "Cena")]
         public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "Podaj kategorię.")]
+        [Display(Name="Kategoria")]
         public string Category { get; set; }
     }
 }
