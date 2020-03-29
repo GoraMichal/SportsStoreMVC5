@@ -4,12 +4,49 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edytuj @Model.Name</h1>
-@using (Html.BeginForm())
-{
-    //Returns an HTML input element for each property in the model
-    @Html.EditorForModel()
+<div class="card">
+    <div class="card-header">
+        <h3>Edycja @Model.Name</h3>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="card-body">
 
-    <input type="submit" value="Zapisz" />
-    @Html.ActionLink("Powrót", "Index")
-}
+            @*jedna z technik uzycia metadanych*@
+            @Html.HiddenFor(m => m.ProductID)
+            @foreach (var prop in ViewData.ModelMetadata.Properties)
+            {
+                if (prop.PropertyName != "ProductID")
+                {
+                    <div class="form-group">
+                        <label>@(prop.DisplayName ?? prop.PropertyName)</label>
+                        @if (prop.PropertyName == "Description")
+                        {
+                            @Html.TextArea(prop.PropertyName, null, new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            @Html.TextBox(prop.PropertyName, null, new { @class = "form-control" })
+                        }
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="card-footer">
+            <input type="submit" value="Zapisz" class="btn btn-primary" />
+            @Html.ActionLink("Anuluj", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+
+@*<h1>Edytuj @Model.Name</h1>
+    @using (Html.BeginForm())
+    {
+        //Returns an HTML input element for each property in the model
+        @Html.EditorForModel()
+
+        <input type="submit" value="Zapisz" />
+        @Html.ActionLink("Powrót", "Index")
+    }*@
