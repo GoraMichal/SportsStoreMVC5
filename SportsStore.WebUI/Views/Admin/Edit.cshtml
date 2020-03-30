@@ -10,7 +10,9 @@
     <div class="card-header">
         <h3>Edycja @Model.Name</h3>
     </div>
-    @using (Html.BeginForm())
+    @*  Przeciazenie BeginForm("Edit", "Admin"))
+        W celu by formularz byl przesylany niezaleznie od tego, ktora metoda akcji go wygenerowala*@
+    @using (Html.BeginForm("Edit", "Admin"))
     {
         <div class="card-body">
 

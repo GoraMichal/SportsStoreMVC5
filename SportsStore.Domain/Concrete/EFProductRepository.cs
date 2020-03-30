@@ -8,6 +8,7 @@ using SportsStore.Domain.Entities;
 
 namespace SportsStore.Domain.Concrete
 {
+    //Klasy korzystajace z Entity Framework
     public class EFProductRepository : IProductRepository
     {
         private EFDbContext context = new EFDbContext();
@@ -34,6 +35,18 @@ namespace SportsStore.Domain.Concrete
                 }
             }
             context.SaveChanges();
+        }
+
+        public Product DeleteProduct(int productID)
+        {
+            Product dbEntry = context.Products.Find(productID);
+            if (dbEntry != null)
+            {
+                context.Products.Remove(dbEntry);
+
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }
