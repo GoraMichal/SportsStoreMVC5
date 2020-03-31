@@ -8,6 +8,8 @@ using SportsStore.Domain.Entities;
 
 namespace SportsStore.WebUI.Controllers
 {
+    [Authorize]
+
     //Konstruktor deklaruje zaleznosc od interfejsu, ktory jest powiazny z Ninject.
     public class AdminController : Controller
     {
