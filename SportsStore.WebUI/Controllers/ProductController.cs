@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
@@ -40,6 +37,22 @@ namespace SportsStore.WebUI.Controllers
                 CurrentCategory = category
             };
             return View(viewModel);
+        }
+
+        //Metoda wyszukuje produkt, zwraca obiekt typu FileContentResult, 
+        //egzemplarze ob. tworzone za pomoca metody File
+        public FileContentResult GetImage(int productId)
+        {
+            Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
+
+            if(product != null)
+            {
+                return File(product.ImageData, product.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
